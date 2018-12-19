@@ -8,9 +8,10 @@ Dokumen ini menjelaskan sedikit tentang cara menggunakan Git dan GitHub untuk ke
 Membahas tentang Git memerlukan materi yang cukup banyak, tetapi pada repo ini hanya akan dibahas pemakaian praktis. Jika menghendaki pemakaian lebih lanjut, bisa membaca dokumentasi di [Website Git](https://www.git-scm.com). Urutan pembahasan adalah sebagai berikut:
 
 1.  [Instalasi Git](01-install-git.md)
-2.  Mengelola Repo Sendiri
+2.  [Konfigurasi Git](02-konfigurasi-git.md)
+3.  Mengelola Repo Sendiri
   * Mengelola repo di account sendiri
   * Mengelola repo di organisasi
-3.  Kolaborasi
-4.  Team dan Proyek
+4.  Kolaborasi
+5.  Team dan Proyek
 
