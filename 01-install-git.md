@@ -1,6 +1,6 @@
 # Instalasi Git
 
-Bagian ini merupakan seri tulisan tentang [Git](https://git-scm.com/). Silahkan ke [REAME.md](README/md) untuk memahami gambaran garis besar materi-materi yang dituliskan.
+Bagian ini merupakan seri tulisan tentang [Git](https://git-scm.com/). Silahkan ke [README.md](README.md) untuk memahami gambaran garis besar materi-materi yang dituliskan.
 
 Git tersedia untuk berbagai sistem operasi. *Precompiled binaries* bisa diperoleh di [halaman dowbload Git](https://git-scm.com/downloads) untuk 3 sistem operasi utama: Linux, Windows, dan Mac OS X.
 
