@@ -9,9 +9,8 @@ Membahas tentang Git memerlukan materi yang cukup banyak, tetapi pada repo ini h
 
 1.  [Instalasi Git](01-install-git.md)
 2.  [Konfigurasi Git](02-konfigurasi-git.md)
-3.  Mengelola Repo Sendiri
-  * Mengelola repo di account sendiri
-  * Mengelola repo di organisasi
+3.  [Mengelola Repo Sendiri](03-mengelola-repo-sendiri.md)
+  * [Mengelola repo di account sendiri](03-mengelola-repo-sendiri-account.md)
+  * [Mengelola repo di organisasi](03-mengelola-repo-sendiri-organisasi.md)
 4.  Kolaborasi
 5.  Team dan Proyek
-
