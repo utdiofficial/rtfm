@@ -8,7 +8,7 @@ Sebagai pengguna Git dan GitHub, kita bisa mempunyai *repository* (sering dising
 
 Suatu repo dimaksudkan untuk menyimpan aset digital (dokumen, *source code*, gambar, dan lain-lain). Setiap satu repo biasanya digunakan untuk satu kepentingan tertentu. Repo yang ada di GitHub ini juga ada di komputer lokal pengguna. Dengan demikian, untuk setiap repo, kita mempunyai tempat penyimpanan di GitHub maupun di komputer lokal dan keduanya tersinkronisasi. Pemakai biasanya melakukan berbagai manipulasi di komputer lokal, setelah itu mengirimkan hasilnya ke repo GitHub. Proses ini disebut dengan proses **push**. 
 
-![Mekanisme Git](images/02/git-repo-sendiri.jpg)
+![Mekanisme Git](images/03/git-repo-sendiri.jpg)
 
 Pada dasarnya, repo yang kita buat bisa berada di akun GitHub kita sendiri maupun menyatu dalam repo organisasi.
 
