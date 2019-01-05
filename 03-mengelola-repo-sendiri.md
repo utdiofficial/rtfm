@@ -13,5 +13,4 @@ Suatu repo dimaksudkan untuk menyimpan aset digital (dokumen, *source code*, gam
 Pada dasarnya, repo yang kita buat bisa berada di akun GitHub kita sendiri maupun menyatu dalam repo organisasi.
 
 * [Mengelola repo sendiri di account sendiri](03-mengelola-repo-sendiri-account.md)
-* [Mengelola repo sendiri di organisasi](03-mengelola-repo-sendiri-organiasi.md]
-
+* [Mengelola repo sendiri di organisasi](03-mengelola-repo-sendiri-organisasi.md)
