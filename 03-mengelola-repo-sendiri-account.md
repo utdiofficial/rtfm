@@ -32,7 +32,7 @@ Setelah langkah-langkah tersebut, repo akan dibuat dan bisa diakses menggunakan 
 
 Proses ```clone``` adalah proses untuk menduplikasikan remote repo di GitHub ke komputer lokal. Untuk melakukan proses ```clone```, gunakan perintah berikut:
 
-``bash
+```bash
 git clone https://github.com/oldstager/awesome-project
 Cloning into 'awesome-project'...
 remote: Enumerating objects: 3, done.
