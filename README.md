@@ -12,5 +12,5 @@ Membahas tentang Git memerlukan materi yang cukup banyak, tetapi pada repo ini h
 3.  [Mengelola Repo Sendiri](03-mengelola-repo-sendiri.md)
   * [Mengelola repo di account sendiri](03-mengelola-repo-sendiri-account.md)
   * [Mengelola repo di organisasi](03-mengelola-repo-sendiri-organisasi.md)
-4.  Kolaborasi
-5.  Team dan Proyek
+4.  [Kolaborasi](04-kolaborasi.md)
+5.  [Team dan Proyek](05-team-proyek.md)
