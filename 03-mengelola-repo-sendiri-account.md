@@ -1,4 +1,4 @@
-# Mengelola Repo Sendiri di Account Sendiri]
+# Mengelola Repo Sendiri di Account Sendiri
 
 [ [<< Kembali](README.md) ]
 
