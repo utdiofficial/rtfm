@@ -176,7 +176,222 @@ $ git branch -D edit-readme-1
 Deleted branch edit-readme-1 (was 032d079).
 $ git branch
 * master
+$ git pull
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (1/1), done.
+From https://github.com/oldstager/awesome-project
+   2ab2e28..7e546b0  master     -> origin/master
+Updating 032d079..7e546b0
+Fast-forward
 $
 ```
+
+### Sinkronisasi
+
+Suatu saat, bisa saja terjadi kita menggunakan komputer lain dan mengedit repo melalui repo lokal di komputer lain, setelah itu pindah ke kamputer lain lagi. Saat itu, kita perlu melakukan sinkronisasi ke kemputer lokal. Perintah untuk sinkronisasi adalah:
+
+```
+$ git pull
+```
+
+Perintah ini dikerjakan di direktori tempat repo lokal kita berada.
+
+### Membatalkan Perubahan
+
+Praktik yang baik adalah membuat *branch* pada saat kita akan melakukan perubahan-perubahan. Jika perubahan-perubahan yang kita lakukan sudah sedemikian kacaunya, maka kita bisa membuat supaya perubahan-perubahan yang kacau tersebut hilang dan kembali ke kondisi bersih seperti semula.
+
+```bash
+$ git checkout -b edit-readme-2
+Switched to a new branch 'edit-readme-2'
+$ vim README.md
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek. Jadi agak kacau nih
+$ git checkout master
+M	README.md
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek. Jadi agak kacau nih
+$ git branch -D edit-readme-2
+Deleted branch edit-readme-2 (was 7e546b0).
+$ git branch
+* master
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek. Jadi agak kacau nih
+$ git reset --hard
+HEAD is now at 7e546b0 Merge pull request #1 from oldstager/edit-readme-1
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek
+$
+```
+
+### Undo Commit Terakhir
+
+Suatu saat, mungkin kita sudah terlanjur mem-*push* perubahan ke repo GitHub, setelah itu kita baru menyadari bahwa perubahan tersebut salah. Untuk itu, kita bisa melakukan ```git revert```.
+
+```
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek
+$ git log --oneline
+7e546b0 (HEAD -> master, origin/master, origin/HEAD) Merge pull request #1 from oldstager/edit-readme-1
+032d079 (origin/edit-readme-1) Add: isi README.md
+2ab2e28 Add: README.md
+8dd68d4 Initial commit
+$ vim README.md
+$ git add -A
+$ git commit -m "Add: contents"
+[master c55fd06] Add: contents
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+$ git push origin master 
+Username for 'https://github.com': oldstager
+Password for 'https://oldstager@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 335 bytes | 335.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/oldstager/awesome-project
+   7e546b0..c55fd06  master -> master
+$ vim README.md
+$  git add -A
+$  git commit -m "Add: contents - 2"
+[master fed7e79] Add: contents - 2
+ 1 file changed, 1 insertion(+)
+$ git push origin master
+Username for 'https://github.com': oldstager
+Password for 'https://oldstager@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 338 bytes | 338.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/oldstager/awesome-project
+   c55fd06..fed7e79  master -> master
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+Ini isi 2
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+$
+```
+
+Contoh di atas adalah contoh untuk mengubah README.md dengan beberapa commit. Setelh itu, kita akan mengembalikan ke posisi terakhir sebelum commit terakhir.
+
+```bash
+$ git revert HEAD
+```
+
+Perintah di atas akan membuka editor. Pada editor tersebut kita bisa mengetikkan pesan *revert* ( = pesan commit untuk pembatalan). Setelah selesai, simpan:
+
+```bash
+[master f800ced] Revert "Add: contents - 2"
+ 1 file changed, 1 deletion(-)
+$
+```
+
+Selanjutnya, tinggal di-*push* ke repo GitHub.
+
+```
+
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+$ git push origin master
+Username for 'https://github.com': oldstager
+Password for 'https://oldstager@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 347 bytes | 347.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/oldstager/awesome-project
+   fed7e79..f800ced  master -> master
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+$
+```
+
+Jika commit sudah dilakukan, tetapi belum di-*push* ke repo GitHub (masih berada di lokal), cara membatalkannya:
+
+```
+$ vim README.md
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+Ini isi tambahan 1
+
+$ git add -A
+$ git commit -m "Add: isi tambahan 1"
+[master 42e6bf0] Add: isi tambahan 1
+ 1 file changed, 2 insertions(+)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+$ git log --oneline
+42e6bf0 (HEAD -> master) Add: isi tambahan 1
+f800ced (origin/master, origin/HEAD) Revert "Add: contents - 2"
+fed7e79 Add: contents - 2
+c55fd06 Add: contents
+7e546b0 Merge pull request #1 from oldstager/edit-readme-1
+032d079 (origin/edit-readme-1) Add: isi README.md
+2ab2e28 Add: README.md
+8dd68d4 Initial commit
+$ git reset --hard HEAD^
+HEAD is now at f800ced Revert "Add: contents - 2"
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+$
+```
+
+
 
 
