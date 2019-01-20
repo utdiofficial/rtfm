@@ -94,5 +94,89 @@ $
 
 Cara ini lebih mudah tetapi mempunyai resiko jika terjadi kesalahan dalam edit. Cara yang lebih aman tetapi memerlukan langkah yang lebih panjang adalah ```branching and merging```
 
+### Mengubah Isi dengan Branching and Merging
+
+Dengan menggunakan cara ini, setiap kali akan melakukan perubaham, perubahan itu dilakukan di komputer lokal dengan membuat suatu *cabang* yang nantinya digunakan untuk menampung perubahan-perubahan tersebut. Setelah itu, cabang itu yang akan dikirim ke repo GitHub untuk dimintai review kemudian digabungkan (```merge```) ke master. Secara umum, repo yang dibuat biasanya sudah mempunyai satu branch yang disebut dengan ```master```. Cara ini lebih aman, terstruktur, terkendali, dan mempunyai
+history yang lebih baik. Jika perubahan yang kita buat sudah terlalu kacau dan kita menyesal, maka ada cara untuk "membersihkan" repo lokal kita. Secara umum, langkahnya adalah sebagai berikut:
+
+1. Buat branch untuk menampung perubahan-perubahan
+2. Lakukan perubahan-perubahan
+3. Add dan commit perubahan-perubahan tersebut ke branch
+4. Kembali ke repo master
+5. Buat pull request di GitHub
+6. Merge pull request di GitHub
+7. Merge branch untuk menampung perubahan-perubahan tersebut ke master.
+8. Selesai.
+
+```bash
+$ git checkout -b edit-readme-1
+Switched to a new branch 'edit-readme-1'
+$ vim README.md
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek
+$ git status
+On branch edit-readme-1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$ git add -A
+$ git commit -m "Add: isi README.md"
+[edit-readme-1 032d079] Add: isi README.md
+ 1 file changed, 1 insertion(+)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+$ git push origin edit-readme-1
+Username for 'https://github.com': oldstager
+Password for 'https://oldstager@github.com':
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 338 bytes | 338.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote:
+remote: Create a pull request for 'edit-readme-1' on GitHub by visiting:
+remote:      https://github.com/oldstager/awesome-project/pull/new/edit-readme-1
+remote:
+To https://github.com/oldstager/awesome-project
+ * [new branch]      edit-readme-1 -> edit-readme-1
+$
+
+```
+
+Setelah itu, kirim *pull request (PR)*:
+
+![Membuat pull request](images/03/03-01-pull-request.png)
+
+Setelah membuat PR, PR tersebut bisa di-merge:
+
+![Merge pull request](images/03/03-02-pull-request.png)
+
+Setelah itu, ```Confirm Merge```, branch yang kita kirimkan tadi sudah dimasukkan ke branch ```master```. Setelah itu, merge di komputer lokal:
+
+```bash
+$ git merge edit-readme-1
+Updating 2ab2e28..032d079
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+$ git branch -D edit-readme-1
+Deleted branch edit-readme-1 (was 032d079).
+$ git branch
+* master
+$
+```
 
 
