@@ -392,6 +392,125 @@ Ini isi 1
 $
 ```
 
+Untuk kembali ke perubahan pada saat yang sudah lama, yang perlu dilakukan adalah melakukan ```git revert <posisi>``` kemudian mengedit secara manual kemudian push ke repo.
 
+```bash
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+Ini isi 2
+
+Ini isi 3
+$ git log --oneline
+b14810f (HEAD -> master, origin/master, origin/HEAD) Add: isi 3
+a7615fb Add: isi 2
+f800ced Revert "Add: contents - 2"
+fed7e79 Add: contents - 2
+c55fd06 Add: contents
+7e546b0 Merge pull request #1 from oldstager/edit-readme-1
+032d079 (origin/edit-readme-1) Add: isi README.md
+2ab2e28 Add: README.md
+8dd68d4 Initial commit
+$ git revert a7615fb
+error: could not revert a7615fb... Add: isi 2
+hint: after resolving the conflicts, mark the corrected paths
+hint: with 'git add <paths>' or 'git rm <paths>'
+hint: and commit the result with 'git commit'
+$
+```
+
+Setelah itu, jika dilihat pada file, akan muncul tambahan untuk memudahkan meng-edit. File ini harus di-*resolve* terlebih dahulu, setelah itu baru di add dan commit:
+
+```bash
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyeka
+
+Ini isi 1
+
+<<<<<<< HEAD
+Ini isi 2
+
+Ini isi 3
+=======
+>>>>>>> parent of a7615fb... Add: isi 2
+```
+
+Edit file tersebut, setelah itu simpan.
+
+```bash
+$ vim README.md 
+$ cat README.md
+# My Awesome Project
+
+Ini isi proyek
+
+Ini isi 1
+
+Ini isi 2 setelah revert
+
+Rni isi 3
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+You are currently reverting commit a7615fb.
+  (fix conflicts and run "git revert --continue")
+  (use "git revert --abort" to cancel the revert operation)
+
+Unmerged paths:
+  (use "git reset HEAD <file>..." to unstage)
+  (use "git add <file>..." to mark resolution)
+
+	both modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+$
+```
+
+Setelah itu, lanjutkan proses revert. Saat ```git revert --continue``` isikan pesan revert.
+
+```bash
+$ git add README.md
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+You are currently reverting commit a7615fb.
+  (all conflicts fixed: run "git revert --continue")
+  (use "git revert --abort" to cancel the revert operation)
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   README.md
+
+$ git revert --continue
+[master dec93e1] Revert "Add: isi 2"
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+$ git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+$ git push origin master
+Username for 'https://github.com': oldstager
+Password for 'https://oldstager@github.com': 
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 401 bytes | 401.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/oldstager/awesome-project
+   b14810f..dec93e1  master -> master
+$
+```
 
 
